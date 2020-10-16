@@ -1,0 +1,33 @@
+{
+  "name": "BasicHtmlTemplate",
+  "version": "1.0.0",
+  "description": "basic html template for npm, uses webpack to compile the resources",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass-watch": "sass --watch src/sass/:src/css --style compressed",
+    "app-package": "gulp",
+    "sync": "gulp sync"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BramDeCneudt/BasicHtmlTemplate.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BramDeCneudt/BasicHtmlTemplate/issues"
+  },
+  "homepage": "https://github.com/BramDeCneudt/BasicHtmlTemplate#readme",
+  "devDependencies": {
+    "browser-sync": "^2.26.12",
+    "gulp": "^4.0.2",
+    "gulp-clean": "^0.4.0",
+    "gulp-minify": "^3.1.0",
+    "gulp-purgecss": "^3.0.0",
+    "gulp-sass": "^4.1.0",
+    "node-sass": "^4.14.1",
+    "sass": "^1.26.10"
+  }
+}
