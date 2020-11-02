@@ -35,7 +35,9 @@ function purgeCss() {
     return gulp.src('src/**/*.css')
         .pipe(purgecss({
             content: ['src/*.html'],
-            safelist: ["display-on-small"]
+            safelist: [
+                //put classes or id names that you don't want to have purged
+            ]
         }))
         .pipe(gulp.dest('dist'))
 }
@@ -67,15 +69,55 @@ function moveImages() {
 }
 
 gulp.task('sync', () => {
+    
+    defaultOperation().apply();
     browserSync.init({
         injectChanges: true,
         server: {
-            baseDir: "./src"
+            baseDir: "./dist"
         }
     });
-    gulp.watch("src/*.html").on("change", reload);
-    gulp.watch("src/js/*.js").on("change", reload);
-    gulp.watch("src/css/*.css").on("change", reload);
+
+    gulp.watch("src/*.html").on("change", htmlChanged);
+    gulp.watch("src/js/*.js").on("change", jsChanged);
+    gulp.watch("src/css/*.css").on("change", cssChanged);
+    gulp.watch("src/docs/*").on("change", docsChanged);
+    gulp.watch("src/images/*").on("change", imagesChanged);
+    gulp.watch("src/vendor/*").on("change", vendorChanged);
 });
 
-exports.default = series(cleanDist, minifyJS, sassToMinCss, moveVendor, moveDocs, moveHtml, purgeCss, moveImages);
+function defaultOperation() {
+    return series(cleanDist, minifyJS, sassToMinCss, moveVendor, moveDocs, moveHtml, purgeCss, moveImages);
+}
+
+function htmlChanged() {
+    moveHtml();
+    reload();
+}
+
+function jsChanged() {
+    minifyJS();
+    reload();
+}
+
+function cssChanged() {
+    purgeCss();
+    reload();
+}
+
+function docsChanged() {
+    moveDocs();
+    reload();
+}
+
+function imagesChanged() {
+    moveImages();
+    reload();
+}
+
+function vendorChanged() {
+    moveVendor();
+    reload();
+}
+
+exports.default = defaultOperation();
