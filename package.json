@@ -23,11 +23,12 @@
     "browser-sync": "^2.26.12",
     "gulp": "^4.0.2",
     "gulp-clean": "^0.4.0",
+    "gulp-compile-handlebars": "^0.6.1",
     "gulp-minify": "^3.1.0",
-    "gulp-mustache": "^5.0.0",
     "gulp-purgecss": "^3.0.0",
     "gulp-sass": "^4.1.0",
     "node-sass": "^4.14.1",
     "sass": "^1.26.10"
-  }
+  },
+  "dependencies": {}
 }

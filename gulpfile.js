@@ -3,13 +3,12 @@ const minify = require("gulp-minify");
 const clean = require('gulp-clean');
 const sass = require('gulp-sass');
 const purgecss = require('gulp-purgecss')
+const handlebars = require('gulp-compile-handlebars');
 
 const browserSync = require('browser-sync').create();
 const reload = browserSync.reload;
 
 const { series } = require('gulp');
-
-const mustache = require("gulp-mustache");
 
 function cleanDist() {
     return gulp.src('dist', { read: false })
@@ -59,12 +58,24 @@ function moveHtml() {
         .pipe(gulp.dest("dist"));
 }
 
-function generateMustache() {
-    gulp.src("./src/template/*.mustache")
-    .pipe(mustache({
-        msg: "Hello Gulp!"
-    }))
-    .pipe(gulp.dest("./dist"));
+function generateHandlebars() {
+    let templateData = {
+    }
+    let options = {
+        ignorePartials: true,
+        partials : {
+        },
+        batch : ['./src/template'],
+        helpers : {
+            capitals : function(str){
+                return str.toUpperCase();
+            }
+        }
+    }
+ 
+    return gulp.src('src/*.html')
+        .pipe(handlebars(templateData, options))
+        .pipe(gulp.dest('dist'));
 }
 
 // not needed in favor of purgeCss
@@ -88,6 +99,7 @@ gulp.task('sync', () => {
     });
 
     gulp.watch("src/*.html").on("change", htmlChanged);
+    gulp.watch("src/template/*.handlebars").on("change", htmlChanged);
     gulp.watch("src/js/*.js").on("change", jsChanged);
     gulp.watch("src/css/*.css").on("change", cssChanged);
     gulp.watch("src/docs/*").on("change", docsChanged);
@@ -96,11 +108,11 @@ gulp.task('sync', () => {
 });
 
 function defaultOperation() {
-    return series(cleanDist, minifyJS, sassToMinCss, moveVendor, moveDocs, moveHtml, generateMustache, purgeCss, moveImages);
+    return series(cleanDist, minifyJS, sassToMinCss, moveVendor, moveDocs, generateHandlebars, purgeCss, moveImages);
 }
 
 function htmlChanged() {
-    moveHtml();
+    generateHandlebars();
     reload();
 }
 
