@@ -5,9 +5,11 @@ const sass = require('gulp-sass');
 const purgecss = require('gulp-purgecss')
 
 const browserSync = require('browser-sync').create();
-var reload = browserSync.reload;
+const reload = browserSync.reload;
 
 const { series } = require('gulp');
+
+const mustache = require("gulp-mustache");
 
 function cleanDist() {
     return gulp.src('dist', { read: false })
@@ -57,6 +59,14 @@ function moveHtml() {
         .pipe(gulp.dest("dist"));
 }
 
+function generateMustache() {
+    gulp.src("./src/template/*.mustache")
+    .pipe(mustache({
+        msg: "Hello Gulp!"
+    }))
+    .pipe(gulp.dest("./dist"));
+}
+
 // not needed in favor of purgeCss
 function moveCss() {
     return gulp.src("src/css/*.css")
@@ -69,7 +79,6 @@ function moveImages() {
 }
 
 gulp.task('sync', () => {
-    
     defaultOperation().apply();
     browserSync.init({
         injectChanges: true,
@@ -87,7 +96,7 @@ gulp.task('sync', () => {
 });
 
 function defaultOperation() {
-    return series(cleanDist, minifyJS, sassToMinCss, moveVendor, moveDocs, moveHtml, purgeCss, moveImages);
+    return series(cleanDist, minifyJS, sassToMinCss, moveVendor, moveDocs, moveHtml, generateMustache, purgeCss, moveImages);
 }
 
 function htmlChanged() {
