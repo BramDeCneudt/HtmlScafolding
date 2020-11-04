@@ -1,16 +1,27 @@
 # HtmlScafolding
-basic html template for npm, uses gulp and sass to compile the resources
+A project to start working on static html pages.
+Out of the box it supports following:
+
+* compiles sass to css
+* automatic minifying of js and css files
+* uses Handlebar.js to supply more (basic) component based implementations as you see in Vue/React without leaving the footprints behind. It all compiles to just basic HTML.
+* uses browser-sync to auto reload on any changes
+* uses PurgeCSS to purge any unused css
 
 
 
 # Folder structure
 
+The project follows a particular structure
+
 * src/
-  * vendor: folder for adding 3rd party dependencies like tailwind.css, alpine.js
+  * vendor: folder for adding 3rd party dependencies like tailwind.css, alpine.js,...
   * js: folder for js stylesheets
   * sass: folder to hold your sass files
   * css: folder to hold css. If you run sass-watch it will compile the sass files to css and add it to this directory
   * root folder holds all the html pages
+  * image and docs: hold the respectively file needed for displaying  images or files
+  * templates: you can create handlebars partials in here to use in you index.html
 
 # Usage
 
