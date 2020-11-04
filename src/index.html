@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
 
@@ -12,8 +13,11 @@
 </head>
 
 <body>
-  {{> header}}
-  
+  {{#> header className="Test"}}
+    <p>My Content</p>
+  {{/header}}
+
   <script src="js/main.js"></script>
 </body>
+
 </html>
