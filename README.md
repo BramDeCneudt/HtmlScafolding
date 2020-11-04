@@ -1,5 +1,6 @@
 # HtmlScafolding
-A project to start working on static html pages.
+A project to start working on static html pages with some out of the box tooling.
+
 Out of the box it supports following:
 
 * compiles sass to css
@@ -25,6 +26,28 @@ The project follows a particular structure
 
 # Usage
 
-npm run app-package, if you want to build the develop output, outputs in dist.
+`npm run app-package`, if you want to build the project.
 
-npm run sass-watch, compiles the sass into css in the src/css folder to use in the html.
+`npm run sass-watch`, compiles the sass into css in the src/css folder to use in the html.
+
+`npm run sync`, starts the local dev server with browser-sync.
+
+# How to start
+
+start by installing the dependencies:
+
+`npm install`
+
+Once that is succeeded you can start the automatic compile from sass to css:
+
+`npm run sass-watch`
+
+and start up the local dev server:
+
+`npm run sync`
+
+Once you are ready with the changes you can build it with:
+
+`npm run app-package`
+
+And deploy it wherever you want it.
