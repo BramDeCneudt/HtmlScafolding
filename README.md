@@ -50,4 +50,4 @@ Once you are ready with the changes you can build it with:
 
 `npm run app-package`
 
-And deploy it wherever you want it.
+And deploy it wherever you want it, the final result is in the dist folder.
