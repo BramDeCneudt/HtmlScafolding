@@ -1,0 +1,1 @@
+document.getElementById("hamburgermenu").onclick=function(){document.getElementById("horizontalmenu").classList.toggle("display-on-small")};let hamburgerMenuItems=document.querySelectorAll(".hb");hamburgerMenuItems.forEach(function(e){e.addEventListener("click",function(){document.getElementById("horizontalmenu").classList.toggle("display-on-small")})});

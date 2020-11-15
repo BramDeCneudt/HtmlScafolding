@@ -38,6 +38,7 @@ function purgeCss() {
             content: ['src/*.html'],
             safelist: [
                 //put classes or id names that you don't want to have purged
+                "display-on-small"
             ]
         }))
         .pipe(gulp.dest('dist'))
