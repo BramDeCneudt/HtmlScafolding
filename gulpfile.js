@@ -11,7 +11,7 @@ const reload = browserSync.reload;
 const { series } = require('gulp');
 
 function cleanDist() {
-    return gulp.src('dist', { read: false })
+    return gulp.src(['dist', '!.gitignore'], { read: false })
         .pipe(clean());
 }
 
