@@ -1,2 +1,4 @@
 node_modules
 src/**/*.css.map
+dist
+!.gitkeep
