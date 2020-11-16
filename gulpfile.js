@@ -35,7 +35,7 @@ function sassToMinCss() {
 function purgeCss() {
     return gulp.src('src/**/*.css')
         .pipe(purgecss({
-            content: ['src/*.html'],
+            content: ['dist/*.html'],
             safelist: [
                 //put classes or id names that you don't want to have purged
             ]
@@ -65,12 +65,7 @@ function generateHandlebars() {
         ignorePartials: true,
         partials : {
         },
-        batch : ['./src/template'],
-        helpers : {
-            capitals : function(str){
-                return str.toUpperCase();
-            }
-        }
+        batch : ['./src/template']
     }
  
     return gulp.src('src/*.html')
