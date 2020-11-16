@@ -1,9 +1,9 @@
 const gulp = require('gulp');
 const minify = require("gulp-minify");
-const clean = require('gulp-clean');
 const sass = require('gulp-sass');
 const purgecss = require('gulp-purgecss')
 const handlebars = require('gulp-compile-handlebars');
+const del = require('del');
 
 const browserSync = require('browser-sync').create();
 const reload = browserSync.reload;
@@ -11,8 +11,7 @@ const reload = browserSync.reload;
 const { series } = require('gulp');
 
 function cleanDist() {
-    return gulp.src(['dist', '!.gitignore'], { read: false })
-        .pipe(clean());
+    return del(['dist/**/*', '!dir/.gitignore']);
 }
 
 function minifyJS() {
